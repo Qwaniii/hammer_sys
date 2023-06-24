@@ -3,10 +3,8 @@ import api from 'services/api'
 
 export const initialState = {
 	loading: false,
-	message: '',
-	showMessage: false,
-	redirect: '',
-    users: [],
+  users: [],
+	client: {},
 }
 
 export const getClients = createAsyncThunk(
@@ -23,29 +21,29 @@ export const getClients = createAsyncThunk(
 export const workSlice = createSlice({
 	name: 'work',
 	initialState,
-	// reducers: {
-    //     toggleCollapsedNav: (state, action) => {
-	// 		state.navCollapsed = action.payload
-	// 	},
-    // },
-    extraReducers: (builder) => {
+	reducers: {
+    updateClient: (state, action) => {
+			state.client = action.payload
+			},
+    },
+  extraReducers: (builder) => {
 		builder
-			// .addCase(getClients.pending, (state) => {
-			// 	state.loading = true
-			// })
+			.addCase(getClients.pending, (state) => {
+				state.loading = true
+			})
 			.addCase(getClients.fulfilled, (state, action) => {
 				state.users = action.payload
+				state.loading = false
 			})
 			.addCase(getClients.rejected, (state, action) => {
-				state.message = action.payload
-				state.showMessage = true
+				console.log(action.payload)
 				state.loading = false
 			})
     }
 })
 
-// export const { 
-//     toggleCollapsedNav,
-// } = workSlice.actions
+export const { 
+	updateClient,
+} = workSlice.actions
 
 export default workSlice.reducer

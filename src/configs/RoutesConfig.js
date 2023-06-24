@@ -66,6 +66,11 @@ export const protectedRoutes = [
         component: React.lazy(() => import('views/app-views/dashboards/clients/line')),
     },
     {
+        key: 'dashboards.orders.line.edit',
+        path: `${APP_PREFIX_PATH}/dashboards/clients/line/edit-user/*`,
+        component: React.lazy(() => import('views/app-views/dashboards/clients/line/edit-user')),
+    },
+    {
         key: 'dashboards.orders.groups',
         path: `${APP_PREFIX_PATH}/dashboards/clients/groups`,
         component: React.lazy(() => import('views/app-views/dashboards/clients/groups')),
