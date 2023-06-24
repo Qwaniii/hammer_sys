@@ -3,7 +3,7 @@ import api from 'services/api'
 
 export const initialState = {
 	loading: false,
-  users: [],
+  	users: [],
 	client: {},
 }
 
@@ -22,8 +22,11 @@ export const workSlice = createSlice({
 	name: 'work',
 	initialState,
 	reducers: {
-    updateClient: (state, action) => {
+    	updateClient: (state, action) => {
 			state.client = action.payload
+			},
+		sendLoading: (state, action) => {
+			state.loading = action.payload
 			},
     },
   extraReducers: (builder) => {
@@ -44,6 +47,7 @@ export const workSlice = createSlice({
 
 export const { 
 	updateClient,
+	sendLoading
 } = workSlice.actions
 
 export default workSlice.reducer

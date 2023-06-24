@@ -1,25 +1,46 @@
 import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
+import Loading from 'components/shared-components/Loading';
+import { APP_PREFIX_PATH } from 'configs/AppConfig';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { sendLoading } from 'store/slices/workSlice';
 
 
 export const EditUser = () => {
   const updClient = useSelector((state) => state.work.client)
+  const loading = useSelector((state) => state.work.loading)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
+  const saveData = () => {
+	dispatch(sendLoading(true))
+	setTimeout(() => {
+		dispatch(sendLoading(false))
+	}, 2000)
+	navigate(-1)
+  }
+
+  if(loading) {
+    return (
+        <Loading cover="content"/>
+      )
+    } else {
   return (
     <>  
       <div className="mt-4">
 					<Form
 						name="basicInformation"
 						layout="vertical"
-
+						initialValues={updClient}
+						onFinish={saveData}
 					>
 						<Row>
 							<Col xs={24} sm={24} md={24} lg={16}>
 								<Row >
 									<Col xs={24} sm={24} md={12}>
 										<Form.Item
-											label={updClient.name}
+											label="Name"
 											name="name"
 											rules={[
 												{
@@ -33,7 +54,7 @@ export const EditUser = () => {
 									</Col>
 									<Col xs={24} sm={24} md={12}>
 										<Form.Item
-											label={updClient.name}
+											label="Username"
 											name="username"
 											rules={[
 												{
@@ -47,7 +68,7 @@ export const EditUser = () => {
 									</Col>
 									<Col xs={24} sm={24} md={12}>
 										<Form.Item
-											label={updClient.email}
+											label="E-mail"
 											name="email"
 											rules={[{ 
 												required: true,
@@ -60,37 +81,20 @@ export const EditUser = () => {
 									</Col>
 									<Col xs={24} sm={24} md={12}>
 										<Form.Item
-											label={updClient.name}
-											name="dateOfBirth"
-										>
-											<DatePicker className="w-100"/>
-										</Form.Item>
-									</Col>
-									<Col xs={24} sm={24} md={12}>
-										<Form.Item
-											label={updClient.name}
-											name="phoneNumber"
+											label="Phone"
+											name="phone"
 										>
 											<Input />
 										</Form.Item>
 									</Col>
 									<Col xs={24} sm={24} md={12}>
 										<Form.Item
-											label={updClient.name}
+											label="Web"
 											name="website"
 										>
 											<Input />
 										</Form.Item>
-									</Col>
-									<Col xs={24} sm={24} md={24}>
-										<Form.Item
-											label={updClient.name}
-											name="address"
-										>
-											<Input />
-										</Form.Item>
-									</Col>
-									
+									</Col>	
 								</Row>
 								<Button type="primary" htmlType="submit">
 									Save Change
@@ -101,6 +105,7 @@ export const EditUser = () => {
 				</div>
     </>
   )
+}
 }
 
 

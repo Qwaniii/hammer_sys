@@ -2,6 +2,7 @@
   "name": "emilus",
   "version": "4.0.0",
   "private": true,
+  "homepage": "https://Qwaniii.github.io/hammer_sys",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -62,6 +63,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -88,6 +91,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.4",
+    "gh-pages": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-csso": "^4.0.1",
     "gulp-debug": "^4.0.0",
