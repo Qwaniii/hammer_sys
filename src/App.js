@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter  } from 'react-router-dom'
+import { BrowserRouter, HashRouter  } from 'react-router-dom'
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import store from './store';
 import history from './history'
@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <BrowserRouter history={history}>
+        <HashRouter history={history} basename={process.env.PUBLIC_URL}>
           <ThemeSwitcherProvider 
             themeMap={themes} 
             defaultTheme={THEME_CONFIG.currentTheme} 
@@ -32,7 +32,7 @@ function App() {
           >
             <Layouts />
           </ThemeSwitcherProvider>
-        </BrowserRouter>  
+        </HashRouter>  
       </Provider>
     </div>
   );
